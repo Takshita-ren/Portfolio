@@ -1,0 +1,1015 @@
+/* ===================================================================
+   ATTACK ON TITAN - SHINGEKI NO TAKSHITA PORTFOLIO STYLESHEET
+   Aesthetic: Medieval Anime / Steampunk / Survey Corps Military HUD
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Noto+Serif+JP:wght@700&display=swap');
+
+:root {
+  --scout-green: #1d3b27;
+  --scout-green-bright: #2f6942;
+  --scout-green-glow: rgba(47, 105, 66, 0.6);
+  --scout-gold: #d4af37;
+  --scout-gold-bright: #f3cf58;
+  --scout-brown: #5c3a21;
+  --scout-leather: #3d2616;
+  --scout-cream: #f4ece1;
+  --scout-parchment: #e9dbc7;
+  --titan-crimson: #a62424;
+  --titan-glow: #e63946;
+  --steam-white: rgba(255, 255, 255, 0.85);
+  --hud-bg: rgba(14, 18, 16, 0.82);
+  --hud-border: rgba(212, 175, 55, 0.45);
+  --hud-border-glow: rgba(212, 175, 55, 0.8);
+  --font-title: 'Cinzel', serif;
+  --font-hud: 'Rajdhani', sans-serif;
+  --font-kanji: 'Noto Serif JP', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #080a09;
+  color: var(--scout-cream);
+  font-family: var(--font-hud);
+  font-size: 16px;
+}
+
+#canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#three-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ===================================================================
+   CINEMATIC & POST-PROCESSING OVERLAYS
+   =================================================================== */
+
+/* Letterbox bars during cinematics */
+.cinematic-bars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.cinematic-bar-top,
+.cinematic-bar-bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: #000;
+  transition: height 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cinematic-bar-top { top: 0; }
+.cinematic-bar-bottom { bottom: 0; }
+
+.cinematic-active .cinematic-bar-top,
+.cinematic-active .cinematic-bar-bottom {
+  height: 8.5%;
+}
+
+/* Screen shake container */
+#shake-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 8;
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* Anime Flash Effect */
+#flash-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #fff 10%, #ffd166 40%, #e63946 80%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 12;
+  transition: opacity 0.1s ease-out;
+}
+
+/* Anime Speed Lines during ODM Flight */
+#speed-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9;
+  opacity: 0;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(255, 255, 255, 0.15) 70%, rgba(255, 255, 255, 0.4) 100%);
+  background-size: cover;
+  transition: opacity 0.25s ease;
+}
+
+.speed-lines-active #speed-lines {
+  opacity: 1;
+  animation: speedLinePulse 0.12s infinite alternate ease-in-out;
+}
+
+@keyframes speedLinePulse {
+  0% { transform: scale(1.0); filter: blur(0px); }
+  100% { transform: scale(1.03); filter: blur(1px); }
+}
+
+/* Vignette overlay */
+.vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+  background: radial-gradient(circle, transparent 55%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+/* ===================================================================
+   ANIME TITLE CARDS & CINEMATIC LABELS
+   =================================================================== */
+
+#cinematic-title-card {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+#cinematic-title-card.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.title-sub {
+  font-family: var(--font-kanji);
+  font-size: 1.1rem;
+  letter-spacing: 0.4em;
+  color: var(--scout-gold-bright);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+  margin-bottom: 0.4rem;
+}
+
+.title-main {
+  font-family: var(--font-title);
+  font-size: 3.2rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9), 0 0 25px rgba(166, 36, 36, 0.7);
+  border-bottom: 2px solid var(--scout-gold);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.title-desc {
+  font-family: var(--font-hud);
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: #cfd8dc;
+  margin-top: 0.6rem;
+  text-transform: uppercase;
+}
+
+/* Skip Cinematic Button */
+#skip-intro-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 35;
+  background: rgba(15, 20, 18, 0.8);
+  border: 1px solid var(--scout-gold);
+  color: var(--scout-gold-bright);
+  padding: 8px 18px;
+  font-family: var(--font-hud);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+#skip-intro-btn:hover {
+  background: var(--scout-gold);
+  color: #0b0f0d;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+  transform: translateY(-2px);
+}
+
+/* ===================================================================
+   SCOUT REGIMENT HUD SYSTEM
+   =================================================================== */
+
+#hud-root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 25;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 30px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+#hud-root.visible {
+  opacity: 1;
+}
+
+/* HUD Top Header */
+.hud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: auto;
+}
+
+.scout-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--hud-bg);
+  padding: 10px 20px;
+  border-left: 4px solid var(--scout-gold);
+  border-top: 1px solid var(--hud-border);
+  border-bottom: 1px solid var(--hud-border);
+  border-right: 1px solid var(--hud-border);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.wings-emblem-svg {
+  width: 38px;
+  height: 38px;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+}
+
+.scout-title-text h1 {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  letter-spacing: 0.12em;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.scout-title-text p {
+  font-size: 0.85rem;
+  color: var(--scout-gold-bright);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Location Status & Compass */
+.location-tracker {
+  background: var(--hud-bg);
+  border: 1px solid var(--hud-border);
+  padding: 10px 20px;
+  text-align: right;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  border-right: 4px solid var(--scout-gold);
+}
+
+.loc-label {
+  font-size: 0.75rem;
+  color: #90a4ae;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.loc-name {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  color: #fff;
+  letter-spacing: 0.1em;
+}
+
+/* Navigation District Markers */
+.district-nav {
+  position: absolute;
+  top: 90px;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.nav-sector-btn {
+  background: rgba(16, 22, 19, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #cfd8dc;
+  padding: 6px 14px;
+  font-family: var(--font-hud);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-sector-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: transparent;
+  transition: background 0.2s;
+}
+
+.nav-sector-btn:hover,
+.nav-sector-btn.active {
+  background: rgba(29, 59, 39, 0.9);
+  color: #fff;
+  border-color: var(--scout-gold-bright);
+  padding-left: 18px;
+  box-shadow: 0 0 12px rgba(47, 105, 66, 0.5);
+}
+
+.nav-sector-btn.active::before {
+  background: var(--scout-gold);
+}
+
+.nav-sector-btn .sector-num {
+  color: var(--scout-gold-bright);
+  font-weight: 700;
+}
+
+/* ===================================================================
+   ODM GEAR TELEMETRY (GAUGES & METERS)
+   =================================================================== */
+
+.odm-telemetry {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  background: var(--hud-bg);
+  border: 1px solid var(--hud-border);
+  border-left: 4px solid var(--scout-green-bright);
+  padding: 14px 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 250px;
+  pointer-events: auto;
+}
+
+.telemetry-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--scout-gold-bright);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 4px;
+}
+
+.gauge-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.gauge-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #b0bec5;
+  letter-spacing: 0.1em;
+}
+
+.gauge-bar-outer {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.gauge-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2f6942, #52b788);
+  box-shadow: 0 0 8px rgba(82, 183, 136, 0.7);
+  width: 95%;
+  transition: width 0.3s ease;
+}
+
+.gauge-bar-fill.cable-gauge {
+  background: linear-gradient(90deg, #d4af37, #f3cf58);
+  box-shadow: 0 0 8px rgba(243, 207, 88, 0.7);
+  width: 100%;
+}
+
+/* ===================================================================
+   ODM ACTION PROMPT / KEYBOARD CONTROLS
+   =================================================================== */
+
+.action-prompt-container {
+  align-self: center;
+  text-align: center;
+  pointer-events: auto;
+  margin-bottom: 10px;
+}
+
+.odm-action-btn {
+  background: linear-gradient(135deg, rgba(29, 59, 39, 0.95), rgba(16, 32, 22, 0.95));
+  border: 2px solid var(--scout-gold);
+  color: #fff;
+  padding: 14px 34px;
+  font-family: var(--font-hud);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.35), 0 8px 30px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.odm-action-btn:hover {
+  background: linear-gradient(135deg, var(--scout-gold), #b38f2a);
+  color: #0b0f0d;
+  box-shadow: 0 0 35px rgba(212, 175, 55, 0.75);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.key-badge {
+  background: #0b0f0d;
+  color: var(--scout-gold-bright);
+  padding: 4px 10px;
+  border-radius: 3px;
+  border: 1px solid var(--scout-gold);
+  font-size: 0.9rem;
+  box-shadow: inset 0 0 5px rgba(212, 175, 55, 0.4);
+}
+
+.odm-action-btn:hover .key-badge {
+  background: #232d27;
+  color: #fff;
+}
+
+.controls-hint {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #b0bec5;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+/* Quick Control Toolbar (Right side) */
+.hud-quick-tools {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.tool-icon-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--hud-bg);
+  border: 1px solid var(--hud-border);
+  color: var(--scout-gold-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.tool-icon-btn:hover {
+  background: var(--scout-green);
+  border-color: var(--scout-gold-bright);
+  transform: scale(1.08);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+/* ===================================================================
+   PORTFOLIO SECTION MODALS / IMMERSIVE DOSSIERS
+   =================================================================== */
+
+.dossier-card {
+  position: absolute;
+  top: 50%;
+  right: 60px;
+  transform: translateY(-50%);
+  width: 460px;
+  max-width: 90vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: rgba(15, 20, 18, 0.92);
+  border: 2px solid var(--scout-gold);
+  border-radius: 4px;
+  padding: 24px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85), inset 0 0 20px rgba(212, 175, 55, 0.15);
+  pointer-events: auto;
+  display: none;
+  animation: dossierSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dossier-card.active {
+  display: block;
+}
+
+@keyframes dossierSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+.dossier-header {
+  border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.dossier-classification {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--titan-glow);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.dossier-name {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: #fff;
+  letter-spacing: 0.1em;
+}
+
+.dossier-role {
+  color: var(--scout-gold-bright);
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+}
+
+.dossier-tag {
+  background: var(--scout-green);
+  border: 1px solid var(--scout-green-bright);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Dossier Content Elements */
+.dossier-bio {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #e0e0e0;
+  margin-bottom: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 12px;
+  border-left: 3px solid var(--scout-gold);
+}
+
+.dossier-specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.spec-item {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.spec-key {
+  font-size: 0.72rem;
+  color: #90a4ae;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.spec-val {
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Scout Combat & Code Radar Bar */
+.combat-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stat-label-wrap {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #cfd8dc;
+  letter-spacing: 0.1em;
+}
+
+.stat-bar-bg {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #d4af37, #f3cf58);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(243, 207, 88, 0.6);
+}
+
+/* Skills Grid (Location 2: Clock Tower) */
+.skills-category {
+  margin-bottom: 16px;
+}
+
+.cat-title {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  color: var(--scout-gold-bright);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cat-title::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background: rgba(212, 175, 55, 0.3);
+}
+
+.skills-pill-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-pill {
+  background: rgba(29, 59, 39, 0.7);
+  border: 1px solid var(--scout-green-bright);
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-radius: 2px;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.skill-pill.highlight {
+  background: rgba(212, 175, 55, 0.25);
+  border-color: var(--scout-gold);
+  color: var(--scout-gold-bright);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.skill-pill:hover {
+  transform: translateY(-2px);
+  background: var(--scout-gold);
+  color: #000;
+}
+
+/* Projects Cards (Location 3: Wall Maria Rampart) */
+.project-card {
+  background: rgba(20, 26, 23, 0.9);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 14px;
+  margin-bottom: 14px;
+  border-radius: 3px;
+  transition: all 0.25s ease;
+}
+
+.project-card:hover {
+  border-color: var(--scout-gold);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.25);
+  transform: translateY(-2px);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.project-title {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.project-rank {
+  font-size: 0.75rem;
+  color: var(--scout-gold-bright);
+  font-weight: 700;
+}
+
+.project-desc {
+  font-size: 0.85rem;
+  color: #cfd8dc;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.tech-tag {
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.72rem;
+  padding: 2px 7px;
+  border-radius: 2px;
+  color: #eceff1;
+}
+
+.project-links {
+  display: flex;
+  gap: 10px;
+}
+
+.proj-link-btn {
+  background: transparent;
+  border: 1px solid var(--scout-gold);
+  color: var(--scout-gold-bright);
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  text-decoration: none;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.proj-link-btn:hover {
+  background: var(--scout-gold);
+  color: #000;
+}
+
+/* Contact Form / Dispatch (Location 5) */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-label {
+  font-size: 0.75rem;
+  color: #b0bec5;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.form-input, .form-textarea {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #fff;
+  padding: 8px 12px;
+  font-family: var(--font-hud);
+  font-size: 0.95rem;
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--scout-gold-bright);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, var(--scout-green), #142a1c);
+  border: 1px solid var(--scout-gold);
+  color: var(--scout-gold-bright);
+  padding: 10px;
+  font-family: var(--font-hud);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.submit-btn:hover {
+  background: var(--scout-gold);
+  color: #000;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-pill {
+  flex: 1;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 8px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+  transition: all 0.2s;
+}
+
+.social-pill:hover {
+  background: var(--scout-green);
+  border-color: var(--scout-gold);
+  color: var(--scout-gold-bright);
+}
+
+/* Dialogue Box / Character Quote */
+#character-dialogue {
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(12, 16, 14, 0.88);
+  border: 1px solid var(--scout-gold);
+  border-left: 5px solid var(--scout-gold-bright);
+  padding: 12px 24px;
+  border-radius: 3px;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 26;
+}
+
+#character-dialogue.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dialogue-speaker {
+  font-size: 0.75rem;
+  color: var(--scout-gold-bright);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.dialogue-text {
+  font-size: 1rem;
+  color: #fff;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN FOR TABLETS & MOBILES
+   =================================================================== */
+
+@media (max-width: 900px) {
+  .district-nav {
+    display: none; /* Auto collapse on small screens */
+  }
+
+  .dossier-card {
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: 92%;
+    top: 48%;
+  }
+
+  .odm-telemetry {
+    display: none;
+  }
+
+  .scout-title-text h1 {
+    font-size: 1.1rem;
+  }
+
+  .title-main {
+    font-size: 2.2rem;
+  }
+}
+
