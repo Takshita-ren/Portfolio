@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Takshita Joshi | Attack on Titan 3D Interactive Portfolio</title>
-  <meta name="description" content="An interactive 3D anime game portfolio inspired by Attack on Titan, featuring cinematic Wall Maria breach, ODM gear flight, and immersive world exploration.">
+  <title>Takshita Joshi | Attack on Titan Interactive Portfolio</title>
+  <meta name="description" content="An interactive Attack on Titan 3D portfolio featuring cinematic world exploration, ODM gear flight transitions, and real-life skills & experience.">
   <link rel="stylesheet" href="style.css">
-  <!-- Three.js 3D Library from CDN -->
+  <!-- Three.js 3D Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body class="cinematic-active">
@@ -36,7 +36,7 @@
   </div>
 
   <!-- Skip Cinematic Button -->
-  <button id="skip-intro-btn" title="Skip cinematic to Shiganshina">
+  <button id="skip-intro-btn" title="Skip cinematic to Introduction">
     <span>Skip Intro</span>
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
       <polygon points="5 4 15 12 5 20 5 4"></polygon>
@@ -48,7 +48,7 @@
   <div id="character-dialogue">
     <div class="dialogue-speaker">TAKSHITA JOSHI // SCOUT REGIMENT</div>
     <div class="dialogue-text" id="dialogue-content">
-      "Wall Maria may have fallen, but our code will breach all barriers. Ready to fly? Press [↑] to launch ODM gear!"
+      "Welcome to my portfolio. Press [↑] or [W] to travel between locations using ODM gear."
     </div>
   </div>
 
@@ -69,65 +69,31 @@
         </svg>
         <div class="scout-title-text">
           <h1>TAKSHITA JOSHI</h1>
-          <p>104TH SCOUT REGIMENT // SOFTWARE ENGINEER</p>
+          <p>PORTFOLIO // SCOUT REGIMENT</p>
         </div>
       </div>
 
       <div class="location-tracker">
-        <div class="loc-label">Active Sector</div>
-        <div class="loc-name" id="loc-name-display">SHIGANSHINA PLAZA</div>
+        <div class="loc-label">Current Location</div>
+        <div class="loc-name" id="loc-name-display">01 / INTRODUCTION</div>
       </div>
     </header>
 
-    <!-- Sector Navigation Menu -->
+    <!-- Sector Navigation Menu (3 Locations) -->
     <nav class="district-nav" id="district-nav">
       <button class="nav-sector-btn active" data-sector="0">
         <span class="sector-num">01</span>
-        <span>SCOUT DOSSIER</span>
+        <span>INTRODUCTION</span>
       </button>
       <button class="nav-sector-btn" data-sector="1">
         <span class="sector-num">02</span>
-        <span>SKILLS CLOCKTOWER</span>
+        <span>SKILLS & EXPERIENCE</span>
       </button>
       <button class="nav-sector-btn" data-sector="2">
         <span class="sector-num">03</span>
-        <span>PROJECTS RAMPART</span>
-      </button>
-      <button class="nav-sector-btn" data-sector="3">
-        <span class="sector-num">04</span>
-        <span>ACCOLADES CAMP</span>
-      </button>
-      <button class="nav-sector-btn" data-sector="4">
-        <span class="sector-num">05</span>
-        <span>DISPATCH / CONTACT</span>
+        <span>CONTACT</span>
       </button>
     </nav>
-
-    <!-- ODM Gear Telemetry Gauges -->
-    <div class="odm-telemetry">
-      <div class="telemetry-title">
-        <span>ODM GEAR MK-IV</span>
-        <span style="color: #4ade80;">READY</span>
-      </div>
-      <div class="gauge-row">
-        <div class="gauge-meta">
-          <span>GAS CANISTERS</span>
-          <span id="gas-val">98%</span>
-        </div>
-        <div class="gauge-bar-outer">
-          <div class="gauge-bar-fill" id="gas-fill" style="width: 98%;"></div>
-        </div>
-      </div>
-      <div class="gauge-row">
-        <div class="gauge-meta">
-          <span>WIRE ANCHORS</span>
-          <span>DUAL LOCKED</span>
-        </div>
-        <div class="gauge-bar-outer">
-          <div class="gauge-bar-fill cable-gauge"></div>
-        </div>
-      </div>
-    </div>
 
     <!-- Center ODM Flight Action Trigger -->
     <div class="action-prompt-container">
@@ -138,12 +104,12 @@
           <path d="M12 19V5M5 12l7-7 7 7"/>
         </svg>
       </button>
-      <div class="controls-hint" id="controls-hint">Press [↑] or [W] to grapple & fly • [↓] or [S] to return</div>
+      <div class="controls-hint" id="controls-hint">Press [↑] or [W] to travel forward • [↓] or [S] to return</div>
     </div>
 
     <!-- Quick Control Tools -->
     <aside class="hud-quick-tools">
-      <button class="tool-icon-btn" id="audio-toggle-btn" title="Toggle Sound / BGM">
+      <button class="tool-icon-btn" id="audio-toggle-btn" title="Toggle Sound / BGM (M)">
         <svg id="audio-icon-on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
           <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -168,268 +134,194 @@
   </div>
 
   <!-- ===================================================================
-       PORTFOLIO SECTORS / INTERACTIVE DOSSIERS
+       PORTFOLIO PANELS (BESIDE AVATAR)
        =================================================================== -->
 
-  <!-- Sector 0: Scout Dossier (About Takshita) -->
+  <!-- Location 1: Introduction -->
   <section class="dossier-card active" id="dossier-sector-0">
     <div class="dossier-header">
       <div>
-        <div class="dossier-classification">MILITARY INTELLIGENCE // TOP SECRET</div>
-        <h2 class="dossier-name">TAKSHITA JOSHI</h2>
-        <div class="dossier-role">104th Special Operations • Computational Vanguard</div>
+        <div class="dossier-classification">SCOUT REGIMENT // OVERVIEW</div>
+        <h2 class="dossier-name">Takshita Joshi</h2>
+        <div class="dossier-role">Student & Creative Technologist</div>
       </div>
-      <div class="dossier-tag">SCOUT REGIMENT</div>
+      <div class="dossier-tag">LOCATION 01</div>
     </div>
 
-    <div class="dossier-bio">
-      "Like the Survey Corps venturing beyond Wall Maria, I push past conventional boundaries to architect clean, scalable, high-performance software. When colossal challenges arise, agility, precision logic, and tenacity cut through."
-    </div>
-
-    <div class="dossier-specs-grid">
-      <div class="spec-item">
-        <div class="spec-key">Age / Identity</div>
-        <div class="spec-val">18 Female • Fair Complexion</div>
+    <!-- ONLY the requested real-life personal info -->
+    <div class="info-list-clean">
+      <div class="info-item-clean">
+        <span class="info-label">Name</span>
+        <span class="info-val">Takshita Joshi</span>
       </div>
-      <div class="spec-item">
-        <div class="spec-key">Equipment</div>
-        <div class="spec-val">ODM Gear MK-IV & Dual Hardened Blades</div>
+      <div class="info-item-clean">
+        <span class="info-label">Birthday</span>
+        <span class="info-val">3 August 2008</span>
       </div>
-      <div class="spec-item">
-        <div class="spec-key">Primary Focus</div>
-        <div class="spec-val">Python Engineering & Full-Stack Systems</div>
-      </div>
-      <div class="spec-item">
-        <div class="spec-key">Education</div>
-        <div class="spec-val">Computer Science & Software Architecture</div>
-      </div>
-    </div>
-
-    <div class="combat-stats">
-      <div class="stat-row">
-        <div class="stat-label-wrap">
-          <span>PYTHON / CODE ARCHITECTURE</span>
-          <span style="color: var(--scout-gold-bright);">98% [SS]</span>
-        </div>
-        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 98%;"></div></div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-label-wrap">
-          <span>ALGORITHMIC PROBLEM SOLVING</span>
-          <span style="color: var(--scout-gold-bright);">96% [S]</span>
-        </div>
-        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 96%;"></div></div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-label-wrap">
-          <span>WEBGL / 3D INTERACTIVE SYSTEMS</span>
-          <span style="color: var(--scout-gold-bright);">92% [S]</span>
-        </div>
-        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 92%;"></div></div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-label-wrap">
-          <span>ODM AGILITY & RESILIENCE</span>
-          <span style="color: var(--scout-gold-bright);">100% [TITAN-SLAYER]</span>
-        </div>
-        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: 100%;"></div></div>
+      <div class="info-item-clean">
+        <span class="info-label">Education</span>
+        <span class="info-val">First-year student at Newton School of Technology, Pune</span>
       </div>
     </div>
   </section>
 
-  <!-- Sector 1: Skills Clock Tower -->
+  <!-- Location 2: Skills and Experience -->
   <section class="dossier-card" id="dossier-sector-1">
     <div class="dossier-header">
       <div>
-        <div class="dossier-classification">ARSENAL & MOBILITY SPECIFICATIONS</div>
-        <h2 class="dossier-name">SKILLS CLOCKTOWER</h2>
-        <div class="dossier-role">Technical Weapons & Specialized Masteries</div>
+        <div class="dossier-classification">PRACTICAL EXPERTISE // ARSENAL</div>
+        <h2 class="dossier-name">Skills & Experience</h2>
+        <div class="dossier-role">Technical Mastery & Content Growth</div>
       </div>
-      <div class="dossier-tag">TACTICAL ARSENAL</div>
+      <div class="dossier-tag">LOCATION 02</div>
     </div>
 
-    <div class="skills-category">
-      <div class="cat-title">Core Programming Languages</div>
-      <div class="skills-pill-box">
-        <div class="skill-pill highlight">★ Python (Advanced / Async / OOP)</div>
-        <div class="skill-pill">JavaScript / ES6+</div>
-        <div class="skill-pill">TypeScript</div>
-        <div class="skill-pill">C++</div>
-        <div class="skill-pill">SQL (PostgreSQL / SQLite)</div>
-        <div class="skill-pill">HTML5 & CSS3 / Modern Web</div>
+    <div class="skills-clean-container">
+      <!-- Programming -->
+      <div class="skill-clean-block">
+        <div class="skill-clean-head">
+          <div class="skill-clean-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <div>
+            <div class="skill-clean-title">Programming</div>
+            <div class="skill-clean-subtitle">Python</div>
+          </div>
+        </div>
+        <div class="skill-clean-desc">
+          Core technical foundation in Python programming for software logic, scripting, and application engineering.
+        </div>
       </div>
-    </div>
 
-    <div class="skills-category">
-      <div class="cat-title">Frameworks & Backend Engines</div>
-      <div class="skills-pill-box">
-        <div class="skill-pill highlight">FastAPI / Flask / Django</div>
-        <div class="skill-pill">Three.js / WebGL 3D</div>
-        <div class="skill-pill">Node.js / Express</div>
-        <div class="skill-pill">PyTorch / TensorFlow AI</div>
-        <div class="skill-pill">TailwindCSS / Modern UI</div>
+      <!-- Content Creation & Audience Reach -->
+      <div class="skill-clean-block">
+        <div class="skill-clean-head">
+          <div class="skill-clean-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="10 8 16 12 10 16 10 8"></polygon>
+            </svg>
+          </div>
+          <div>
+            <div class="skill-clean-title">Content Creation & Audience Reach</div>
+            <div class="skill-clean-subtitle">100,000+ Monthly Views</div>
+          </div>
+        </div>
+        <div class="skill-clean-desc">
+          Experience running and growing an active content channel, consistently generating over 100,000 monthly views through strategic distribution.
+        </div>
       </div>
-    </div>
 
-    <div class="skills-category">
-      <div class="cat-title">Survey Tools & Cloud Infrastructure</div>
-      <div class="skills-pill-box">
-        <div class="skill-pill">Git / GitHub Version Control</div>
-        <div class="skill-pill">Docker & Containerization</div>
-        <div class="skill-pill">Linux / UNIX Shell Scripting</div>
-        <div class="skill-pill">RESTful & GraphQL APIs</div>
-        <div class="skill-pill">CI/CD Workflows</div>
-        <div class="skill-pill">Blender & 3D Modeling</div>
+      <!-- Video Editing -->
+      <div class="skill-clean-block">
+        <div class="skill-clean-head">
+          <div class="skill-clean-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+              <line x1="7" y1="2" x2="7" y2="22"></line>
+              <line x1="17" y1="2" x2="17" y2="22"></line>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <line x1="2" y1="7" x2="7" y2="7"></line>
+              <line x1="2" y1="17" x2="7" y2="17"></line>
+              <line x1="17" y1="17" x2="22" y2="17"></line>
+              <line x1="17" y1="7" x2="22" y2="7"></line>
+            </svg>
+          </div>
+          <div>
+            <div class="skill-clean-title">Video Editing</div>
+            <div class="skill-clean-subtitle">Content with Millions of Views</div>
+          </div>
+        </div>
+        <div class="skill-clean-desc">
+          Hands-on experience editing high-impact video content, including viral productions that have achieved millions of views across platforms.
+        </div>
+      </div>
+
+      <!-- Creative Skills -->
+      <div class="skill-clean-block">
+        <div class="skill-clean-head">
+          <div class="skill-clean-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="skill-clean-title">Creative Skills</div>
+            <div class="skill-clean-subtitle">Ideation, Storytelling & Engagement</div>
+          </div>
+        </div>
+        <div class="skill-clean-desc">
+          Skilled in end-to-end content ideation, compelling visual storytelling, narrative pacing, and deep understanding of audience retention and engagement.
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Sector 2: Projects Rampart (Wall Maria) -->
+  <!-- Location 3: Contact -->
   <section class="dossier-card" id="dossier-sector-2">
     <div class="dossier-header">
       <div>
-        <div class="dossier-classification">MISSION RECON ARCHIVES</div>
-        <h2 class="dossier-name">PROJECTS RAMPART</h2>
-        <div class="dossier-role">Deployed Applications & Strategic Systems</div>
+        <div class="dossier-classification">COMMUNICATION FREQUENCY // CONTACT</div>
+        <h2 class="dossier-name">Get In Touch</h2>
+        <div class="dossier-role">Direct Connections & Collaboration</div>
       </div>
-      <div class="dossier-tag">ACTIVE MISSIONS</div>
+      <div class="dossier-tag">LOCATION 03</div>
     </div>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title">Titan-Vision AI Recon System</div>
-        <div class="project-rank">RANK: S-TIER</div>
-      </div>
-      <div class="project-desc">
-        Deep learning computer vision system built with Python and PyTorch for high-speed anomaly detection, real-time object tracking, and spatial mapping.
-      </div>
-      <div class="project-tech">
-        <span class="tech-tag">Python</span>
-        <span class="tech-tag">PyTorch</span>
-        <span class="tech-tag">OpenCV</span>
-        <span class="tech-tag">FastAPI</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/takshita" target="_blank" class="proj-link-btn">View Mission Code →</a>
-      </div>
-    </div>
+    <div class="contact-clean-box">
+      <p class="contact-clean-desc">
+        Feel free to reach out for software projects, content collaborations, or video production opportunities.
+      </p>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title">Scout Grid: Distributed Telemetry</div>
-        <div class="project-rank">RANK: A-TIER</div>
-      </div>
-      <div class="project-desc">
-        Scalable microservice backend architecture handling real-time WebSockets, streaming analytics, and automated alerting with sub-millisecond response latency.
-      </div>
-      <div class="project-tech">
-        <span class="tech-tag">Python</span>
-        <span class="tech-tag">AsyncIO</span>
-        <span class="tech-tag">Docker</span>
-        <span class="tech-tag">PostgreSQL</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/takshita" target="_blank" class="proj-link-btn">View Mission Code →</a>
-      </div>
-    </div>
+      <div class="contact-links-stack">
+        <!-- Clickable Email -->
+        <a href="mailto:takshita.qc@gmail.com" class="contact-link-row">
+          <div class="contact-link-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <div class="contact-link-details">
+            <span class="contact-link-label">Email</span>
+            <span class="contact-link-value">takshita.qc@gmail.com</span>
+          </div>
+          <span class="contact-link-action">Send Email →</span>
+        </a>
 
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title">Shingeki 3D Interactive Web Universe</div>
-        <div class="project-rank">RANK: S-TIER</div>
-      </div>
-      <div class="project-desc">
-        Next-generation WebGL 3D game engine featuring procedural anime shaders, dynamic physics destruction, and fluid character camera tracking.
-      </div>
-      <div class="project-tech">
-        <span class="tech-tag">Three.js</span>
-        <span class="tech-tag">WebGL</span>
-        <span class="tech-tag">JavaScript</span>
-        <span class="tech-tag">Web Audio API</span>
-      </div>
-      <div class="project-links">
-        <a href="#" class="proj-link-btn">Active Deployment →</a>
-      </div>
-    </div>
-  </section>
+        <!-- GitHub -->
+        <a href="https://github.com/takshita" target="_blank" rel="noopener noreferrer" class="contact-link-row">
+          <div class="contact-link-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+          </div>
+          <div class="contact-link-details">
+            <span class="contact-link-label">GitHub</span>
+            <span class="contact-link-value">github.com/takshita</span>
+          </div>
+          <span class="contact-link-action">Visit Profile →</span>
+        </a>
 
-  <!-- Sector 3: Accolades Camp -->
-  <section class="dossier-card" id="dossier-sector-3">
-    <div class="dossier-header">
-      <div>
-        <div class="dossier-classification">HONORS & SERVICE COMMENDATIONS</div>
-        <h2 class="dossier-name">ACCOLADES & EXPEDITIONS</h2>
-        <div class="dossier-role">Milestones, Certifications & Achievements</div>
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-link-row">
+          <div class="contact-link-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </div>
+          <div class="contact-link-details">
+            <span class="contact-link-label">LinkedIn</span>
+            <span class="contact-link-value">Takshita Joshi</span>
+          </div>
+          <span class="contact-link-action">Connect →</span>
+        </a>
       </div>
-      <div class="dossier-tag">MERIT HONORS</div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title">1st Place • National Hackathon Expedition</div>
-        <div class="project-rank">2026</div>
-      </div>
-      <div class="project-desc">
-        Engineered an autonomous disaster relief coordination tool in 36 hours, integrating satellite telemetry and graph routing algorithms.
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title">Top 1% Academic Excellence • Computer Science</div>
-        <div class="project-rank">MERIT SCHOLAR</div>
-      </div>
-      <div class="project-desc">
-        Distinguished honors in Advanced Data Structures, Algorithms, Discrete Mathematics, and Distributed Operating Systems.
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-title">Open Source Vanguard Contributor</div>
-        <div class="project-rank">SCOUT COMMENDED</div>
-      </div>
-      <div class="project-desc">
-        Active contributor to open-source developer tooling, CLI frameworks, and computational graphic libraries.
-      </div>
-    </div>
-  </section>
-
-  <!-- Sector 4: Dispatch / Contact -->
-  <section class="dossier-card" id="dossier-sector-4">
-    <div class="dossier-header">
-      <div>
-        <div class="dossier-classification">SIGNAL TRANSMISSION GATEWAY</div>
-        <h2 class="dossier-name">SCOUT DISPATCH</h2>
-        <div class="dossier-role">Establish Direct Communication Line</div>
-      </div>
-      <div class="dossier-tag">ENCRYPTED LINE</div>
-    </div>
-
-    <div class="dossier-bio">
-      "Looking to enlist an agile, dedicated software engineer for your expedition? Fire a smoke signal below or connect via direct frequency."
-    </div>
-
-    <form class="contact-form" id="scout-dispatch-form" onsubmit="event.preventDefault(); alert('Scout flare received! Message dispatched successfully to Takshita Joshi.');">
-      <div class="form-group">
-        <label class="form-label">Cadet / Organization Name</label>
-        <input type="text" class="form-input" placeholder="e.g. Commander Erwin / Tech Recruiter" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Transmission Frequency (Email)</label>
-        <input type="email" class="form-input" placeholder="cadet@surveycorps.org" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Dispatch Brief (Message)</label>
-        <textarea class="form-textarea" placeholder="State your mission objective, collaboration proposition, or project details..." required></textarea>
-      </div>
-      <button type="submit" class="submit-btn">FIRE GREEN SMOKE SIGNAL (SEND)</button>
-    </form>
-
-    <div class="social-links">
-      <a href="https://github.com/takshita" target="_blank" class="social-pill">GITHUB</a>
-      <a href="https://linkedin.com" target="_blank" class="social-pill">LINKEDIN</a>
-      <a href="mailto:takshita@example.com" class="social-pill">DIRECT EMAIL</a>
     </div>
   </section>
 
@@ -437,4 +329,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-

@@ -1,24 +1,18 @@
 /* ===================================================================
-   ATTACK ON TITAN - SHINGEKI NO TAKSHITA PORTFOLIO STYLESHEET
-   Aesthetic: Medieval Anime / Steampunk / Survey Corps Military HUD
+   ATTACK ON TITAN - TAKSHITA JOSHI PORTFOLIO STYLESHEET
+   Aesthetic: Medieval Anime / Survey Corps Military HUD / Clean Glass
    =================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Noto+Serif+JP:wght@700&display=swap');
 
 :root {
-  --scout-green: #1d3b27;
+  --scout-green: #1a3b25;
   --scout-green-bright: #2f6942;
-  --scout-green-glow: rgba(47, 105, 66, 0.6);
   --scout-gold: #d4af37;
   --scout-gold-bright: #f3cf58;
-  --scout-brown: #5c3a21;
-  --scout-leather: #3d2616;
   --scout-cream: #f4ece1;
-  --scout-parchment: #e9dbc7;
-  --titan-crimson: #a62424;
   --titan-glow: #e63946;
-  --steam-white: rgba(255, 255, 255, 0.85);
-  --hud-bg: rgba(14, 18, 16, 0.82);
+  --hud-bg: rgba(12, 16, 14, 0.88);
   --hud-border: rgba(212, 175, 55, 0.45);
   --hud-border-glow: rgba(212, 175, 55, 0.8);
   --font-title: 'Cinzel', serif;
@@ -63,7 +57,6 @@ html, body {
    CINEMATIC & POST-PROCESSING OVERLAYS
    =================================================================== */
 
-/* Letterbox bars during cinematics */
 .cinematic-bars {
   position: absolute;
   top: 0;
@@ -92,7 +85,6 @@ html, body {
   height: 8.5%;
 }
 
-/* Screen shake container */
 #shake-overlay {
   position: absolute;
   top: 0;
@@ -106,7 +98,6 @@ html, body {
   transition: opacity 0.15s ease;
 }
 
-/* Anime Flash Effect */
 #flash-overlay {
   position: absolute;
   top: 0;
@@ -120,7 +111,6 @@ html, body {
   transition: opacity 0.1s ease-out;
 }
 
-/* Anime Speed Lines during ODM Flight */
 #speed-lines {
   position: absolute;
   top: 0;
@@ -130,7 +120,7 @@ html, body {
   pointer-events: none;
   z-index: 9;
   opacity: 0;
-  background: radial-gradient(ellipse at center, transparent 35%, rgba(255, 255, 255, 0.15) 70%, rgba(255, 255, 255, 0.4) 100%);
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(255, 255, 255, 0.18) 70%, rgba(255, 255, 255, 0.45) 100%);
   background-size: cover;
   transition: opacity 0.25s ease;
 }
@@ -145,7 +135,6 @@ html, body {
   100% { transform: scale(1.03); filter: blur(1px); }
 }
 
-/* Vignette overlay */
 .vignette {
   position: absolute;
   top: 0;
@@ -154,11 +143,11 @@ html, body {
   height: 100%;
   pointer-events: none;
   z-index: 6;
-  background: radial-gradient(circle, transparent 55%, rgba(0, 0, 0, 0.75) 100%);
+  background: radial-gradient(circle, transparent 55%, rgba(0, 0, 0, 0.65) 100%);
 }
 
 /* ===================================================================
-   ANIME TITLE CARDS & CINEMATIC LABELS
+   OPENING CINEMATIC TITLE CARD
    =================================================================== */
 
 #cinematic-title-card {
@@ -209,13 +198,12 @@ html, body {
   text-transform: uppercase;
 }
 
-/* Skip Cinematic Button */
 #skip-intro-btn {
   position: absolute;
   top: 24px;
   right: 24px;
   z-index: 35;
-  background: rgba(15, 20, 18, 0.8);
+  background: rgba(15, 20, 18, 0.85);
   border: 1px solid var(--scout-gold);
   color: var(--scout-gold-bright);
   padding: 8px 18px;
@@ -240,7 +228,7 @@ html, body {
 }
 
 /* ===================================================================
-   SCOUT REGIMENT HUD SYSTEM
+   SURVEY CORPS HUD & HEADER
    =================================================================== */
 
 #hud-root {
@@ -263,7 +251,6 @@ html, body {
   opacity: 1;
 }
 
-/* HUD Top Header */
 .hud-header {
   display: flex;
   justify-content: space-between;
@@ -306,7 +293,6 @@ html, body {
   text-transform: uppercase;
 }
 
-/* Location Status & Compass */
 .location-tracker {
   background: var(--hud-bg);
   border: 1px solid var(--hud-border);
@@ -331,7 +317,7 @@ html, body {
   letter-spacing: 0.1em;
 }
 
-/* Navigation District Markers */
+/* 3 Sector Navigation Buttons */
 .district-nav {
   position: absolute;
   top: 90px;
@@ -343,12 +329,12 @@ html, body {
 }
 
 .nav-sector-btn {
-  background: rgba(16, 22, 19, 0.75);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: rgba(16, 22, 19, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.35);
   color: #cfd8dc;
-  padding: 6px 14px;
+  padding: 8px 16px;
   font-family: var(--font-hud);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 600;
   letter-spacing: 0.15em;
   text-align: left;
@@ -357,7 +343,7 @@ html, body {
   align-items: center;
   gap: 10px;
   transition: all 0.2s ease;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
   position: relative;
   overflow: hidden;
 }
@@ -375,11 +361,11 @@ html, body {
 
 .nav-sector-btn:hover,
 .nav-sector-btn.active {
-  background: rgba(29, 59, 39, 0.9);
+  background: rgba(29, 59, 39, 0.95);
   color: #fff;
   border-color: var(--scout-gold-bright);
-  padding-left: 18px;
-  box-shadow: 0 0 12px rgba(47, 105, 66, 0.5);
+  padding-left: 20px;
+  box-shadow: 0 0 14px rgba(47, 105, 66, 0.6);
 }
 
 .nav-sector-btn.active::before {
@@ -392,93 +378,23 @@ html, body {
 }
 
 /* ===================================================================
-   ODM GEAR TELEMETRY (GAUGES & METERS)
-   =================================================================== */
-
-.odm-telemetry {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-  background: var(--hud-bg);
-  border: 1px solid var(--hud-border);
-  border-left: 4px solid var(--scout-green-bright);
-  padding: 14px 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 250px;
-  pointer-events: auto;
-}
-
-.telemetry-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.8rem;
-  color: var(--scout-gold-bright);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 4px;
-}
-
-.gauge-row {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.gauge-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  color: #b0bec5;
-  letter-spacing: 0.1em;
-}
-
-.gauge-bar-outer {
-  width: 100%;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 1px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.gauge-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #2f6942, #52b788);
-  box-shadow: 0 0 8px rgba(82, 183, 136, 0.7);
-  width: 95%;
-  transition: width 0.3s ease;
-}
-
-.gauge-bar-fill.cable-gauge {
-  background: linear-gradient(90deg, #d4af37, #f3cf58);
-  box-shadow: 0 0 8px rgba(243, 207, 88, 0.7);
-  width: 100%;
-}
-
-/* ===================================================================
-   ODM ACTION PROMPT / KEYBOARD CONTROLS
+   ODM ACTION PROMPT (CENTER BOTTOM)
    =================================================================== */
 
 .action-prompt-container {
   align-self: center;
   text-align: center;
   pointer-events: auto;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .odm-action-btn {
   background: linear-gradient(135deg, rgba(29, 59, 39, 0.95), rgba(16, 32, 22, 0.95));
   border: 2px solid var(--scout-gold);
   color: #fff;
-  padding: 14px 34px;
+  padding: 13px 32px;
   font-family: var(--font-hud);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -496,7 +412,7 @@ html, body {
   background: linear-gradient(135deg, var(--scout-gold), #b38f2a);
   color: #0b0f0d;
   box-shadow: 0 0 35px rgba(212, 175, 55, 0.75);
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-2px);
 }
 
 .key-badge {
@@ -505,8 +421,7 @@ html, body {
   padding: 4px 10px;
   border-radius: 3px;
   border: 1px solid var(--scout-gold);
-  font-size: 0.9rem;
-  box-shadow: inset 0 0 5px rgba(212, 175, 55, 0.4);
+  font-size: 0.85rem;
 }
 
 .odm-action-btn:hover .key-badge {
@@ -516,14 +431,14 @@ html, body {
 
 .controls-hint {
   margin-top: 8px;
-  font-size: 0.8rem;
-  color: #b0bec5;
+  font-size: 0.82rem;
+  color: #cfd8dc;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
 }
 
-/* Quick Control Toolbar (Right side) */
+/* Quick Tools Toolbar (Right side) */
 .hud-quick-tools {
   position: absolute;
   right: 30px;
@@ -556,396 +471,10 @@ html, body {
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
 }
 
-/* ===================================================================
-   PORTFOLIO SECTION MODALS / IMMERSIVE DOSSIERS
-   =================================================================== */
-
-.dossier-card {
-  position: absolute;
-  top: 50%;
-  right: 60px;
-  transform: translateY(-50%);
-  width: 460px;
-  max-width: 90vw;
-  max-height: 85vh;
-  overflow-y: auto;
-  background: rgba(15, 20, 18, 0.92);
-  border: 2px solid var(--scout-gold);
-  border-radius: 4px;
-  padding: 24px;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85), inset 0 0 20px rgba(212, 175, 55, 0.15);
-  pointer-events: auto;
-  display: none;
-  animation: dossierSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.dossier-card.active {
-  display: block;
-}
-
-@keyframes dossierSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-50%) translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
-  }
-}
-
-.dossier-header {
-  border-bottom: 2px solid rgba(212, 175, 55, 0.4);
-  padding-bottom: 12px;
-  margin-bottom: 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.dossier-classification {
-  font-size: 0.75rem;
-  letter-spacing: 0.25em;
-  color: var(--titan-glow);
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.dossier-name {
-  font-family: var(--font-title);
-  font-size: 1.8rem;
-  color: #fff;
-  letter-spacing: 0.1em;
-}
-
-.dossier-role {
-  color: var(--scout-gold-bright);
-  font-size: 0.95rem;
-  letter-spacing: 0.15em;
-}
-
-.dossier-tag {
-  background: var(--scout-green);
-  border: 1px solid var(--scout-green-bright);
-  color: #fff;
-  font-size: 0.7rem;
-  padding: 4px 8px;
-  border-radius: 2px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-/* Dossier Content Elements */
-.dossier-bio {
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: #e0e0e0;
-  margin-bottom: 16px;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 12px;
-  border-left: 3px solid var(--scout-gold);
-}
-
-.dossier-specs-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 18px;
-}
-
-.spec-item {
-  background: rgba(255, 255, 255, 0.04);
-  padding: 8px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.spec-key {
-  font-size: 0.72rem;
-  color: #90a4ae;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-}
-
-.spec-val {
-  font-size: 0.95rem;
-  color: #fff;
-  font-weight: 600;
-}
-
-/* Scout Combat & Code Radar Bar */
-.combat-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.stat-row {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.stat-label-wrap {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  color: #cfd8dc;
-  letter-spacing: 0.1em;
-}
-
-.stat-bar-bg {
-  width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.stat-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #d4af37, #f3cf58);
-  border-radius: 2px;
-  box-shadow: 0 0 8px rgba(243, 207, 88, 0.6);
-}
-
-/* Skills Grid (Location 2: Clock Tower) */
-.skills-category {
-  margin-bottom: 16px;
-}
-
-.cat-title {
-  font-family: var(--font-title);
-  font-size: 0.95rem;
-  color: var(--scout-gold-bright);
-  letter-spacing: 0.15em;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.cat-title::after {
-  content: '';
-  flex-grow: 1;
-  height: 1px;
-  background: rgba(212, 175, 55, 0.3);
-}
-
-.skills-pill-box {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.skill-pill {
-  background: rgba(29, 59, 39, 0.7);
-  border: 1px solid var(--scout-green-bright);
-  color: #fff;
-  padding: 6px 12px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  border-radius: 2px;
-  transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.skill-pill.highlight {
-  background: rgba(212, 175, 55, 0.25);
-  border-color: var(--scout-gold);
-  color: var(--scout-gold-bright);
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-}
-
-.skill-pill:hover {
-  transform: translateY(-2px);
-  background: var(--scout-gold);
-  color: #000;
-}
-
-/* Projects Cards (Location 3: Wall Maria Rampart) */
-.project-card {
-  background: rgba(20, 26, 23, 0.9);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  padding: 14px;
-  margin-bottom: 14px;
-  border-radius: 3px;
-  transition: all 0.25s ease;
-}
-
-.project-card:hover {
-  border-color: var(--scout-gold);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.25);
-  transform: translateY(-2px);
-}
-
-.project-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 6px;
-}
-
-.project-title {
-  font-family: var(--font-title);
-  font-size: 1.1rem;
-  color: #fff;
-}
-
-.project-rank {
-  font-size: 0.75rem;
-  color: var(--scout-gold-bright);
-  font-weight: 700;
-}
-
-.project-desc {
-  font-size: 0.85rem;
-  color: #cfd8dc;
-  line-height: 1.5;
-  margin-bottom: 10px;
-}
-
-.project-tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-
-.tech-tag {
-  background: rgba(255, 255, 255, 0.08);
-  font-size: 0.72rem;
-  padding: 2px 7px;
-  border-radius: 2px;
-  color: #eceff1;
-}
-
-.project-links {
-  display: flex;
-  gap: 10px;
-}
-
-.proj-link-btn {
-  background: transparent;
-  border: 1px solid var(--scout-gold);
-  color: var(--scout-gold-bright);
-  padding: 4px 12px;
-  font-size: 0.75rem;
-  text-decoration: none;
-  border-radius: 2px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.proj-link-btn:hover {
-  background: var(--scout-gold);
-  color: #000;
-}
-
-/* Contact Form / Dispatch (Location 5) */
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.form-label {
-  font-size: 0.75rem;
-  color: #b0bec5;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.form-input, .form-textarea {
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  color: #fff;
-  padding: 8px 12px;
-  font-family: var(--font-hud);
-  font-size: 0.95rem;
-  border-radius: 2px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.form-input:focus, .form-textarea:focus {
-  border-color: var(--scout-gold-bright);
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-}
-
-.form-textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-.submit-btn {
-  background: linear-gradient(135deg, var(--scout-green), #142a1c);
-  border: 1px solid var(--scout-gold);
-  color: var(--scout-gold-bright);
-  padding: 10px;
-  font-family: var(--font-hud);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  cursor: pointer;
-  border-radius: 2px;
-  transition: all 0.2s;
-}
-
-.submit-btn:hover {
-  background: var(--scout-gold);
-  color: #000;
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-}
-
-.social-links {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.social-pill {
-  flex: 1;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fff;
-  padding: 8px;
-  font-size: 0.85rem;
-  text-decoration: none;
-  border-radius: 2px;
-  letter-spacing: 0.1em;
-  transition: all 0.2s;
-}
-
-.social-pill:hover {
-  background: var(--scout-green);
-  border-color: var(--scout-gold);
-  color: var(--scout-gold-bright);
-}
-
-/* Dialogue Box / Character Quote */
+/* In-Game Dialogue Box */
 #character-dialogue {
   position: absolute;
-  bottom: 120px;
+  bottom: 110px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(12, 16, 14, 0.88);
@@ -955,7 +484,7 @@ html, body {
   border-radius: 3px;
   backdrop-filter: blur(8px);
   pointer-events: none;
-  max-width: 600px;
+  max-width: 580px;
   width: 90%;
   text-align: center;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
@@ -978,30 +507,311 @@ html, body {
 }
 
 .dialogue-text {
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: #fff;
   font-style: italic;
   line-height: 1.4;
 }
 
 /* ===================================================================
-   RESPONSIVE DESIGN FOR TABLETS & MOBILES
+   PANELS BESIDE AVATAR (CLEAN, READABLE, MINIMAL)
+   =================================================================== */
+
+.dossier-card {
+  position: absolute;
+  top: 50%;
+  right: 5vw;
+  transform: translateY(-50%);
+  width: 440px;
+  max-width: 44vw;
+  max-height: 82vh;
+  overflow-y: auto;
+  background: rgba(12, 16, 14, 0.88);
+  border: 1.5px solid var(--scout-gold);
+  border-radius: 4px;
+  padding: 26px 28px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85), inset 0 0 20px rgba(212, 175, 55, 0.1);
+  pointer-events: auto;
+  display: none;
+  animation: panelSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 28;
+}
+
+.dossier-card.active {
+  display: block;
+}
+
+@keyframes panelSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+.dossier-header {
+  border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.dossier-classification {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--titan-glow);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.dossier-name {
+  font-family: var(--font-title);
+  font-size: 1.85rem;
+  color: #fff;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+.dossier-role {
+  color: var(--scout-gold-bright);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  margin-top: 3px;
+}
+
+.dossier-tag {
+  background: var(--scout-green);
+  border: 1px solid var(--scout-green-bright);
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 2px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ===================================================================
+   LOCATION 01: INTRODUCTION STYLES (CLEAN & MINIMAL)
+   =================================================================== */
+
+.info-list-clean {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.info-item-clean {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-left: 4px solid var(--scout-gold);
+  padding: 14px 18px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.info-item-clean:hover {
+  background: rgba(29, 59, 39, 0.45);
+  border-color: var(--scout-gold-bright);
+  transform: translateX(4px);
+}
+
+.info-label {
+  font-size: 0.78rem;
+  color: #90a4ae;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+}
+
+.info-val {
+  font-size: 1.15rem;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 1.35;
+}
+
+/* ===================================================================
+   LOCATION 02: SKILLS & EXPERIENCE (REAL-WORLD ABILITIES)
+   =================================================================== */
+
+.skills-clean-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skill-clean-block {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 3px;
+  padding: 14px 16px;
+  transition: all 0.25s ease;
+}
+
+.skill-clean-block:hover {
+  background: rgba(29, 59, 39, 0.5);
+  border-color: var(--scout-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+.skill-clean-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.skill-clean-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 3px;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid var(--scout-gold);
+  color: var(--scout-gold-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.skill-clean-title {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  color: #fff;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+.skill-clean-subtitle {
+  font-size: 0.82rem;
+  color: var(--scout-gold-bright);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.skill-clean-desc {
+  font-size: 0.9rem;
+  color: #cfd8dc;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+/* ===================================================================
+   LOCATION 03: CONTACT STYLES (DIRECT CHANNELS)
+   =================================================================== */
+
+.contact-clean-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-clean-desc {
+  font-size: 0.92rem;
+  color: #cfd8dc;
+  line-height: 1.55;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 12px 14px;
+  border-left: 3px solid var(--scout-gold);
+}
+
+.contact-links-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-link-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 12px 16px;
+  border-radius: 3px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s ease;
+}
+
+.contact-link-row:hover {
+  background: var(--scout-green);
+  border-color: var(--scout-gold-bright);
+  transform: translateX(4px);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+}
+
+.contact-link-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 3px;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid var(--scout-gold);
+  color: var(--scout-gold-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-link-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.contact-link-label {
+  font-size: 0.72rem;
+  color: #90a4ae;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.contact-link-value {
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.contact-link-action {
+  font-size: 0.8rem;
+  color: var(--scout-gold-bright);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN (DESKTOP, TABLET, MOBILE)
    =================================================================== */
 
 @media (max-width: 900px) {
   .district-nav {
-    display: none; /* Auto collapse on small screens */
+    display: none;
   }
 
   .dossier-card {
     right: 50%;
     transform: translate(50%, -50%);
     width: 92%;
-    top: 48%;
-  }
-
-  .odm-telemetry {
-    display: none;
+    max-width: 92vw;
+    top: 50%;
+    padding: 18px 20px;
   }
 
   .scout-title-text h1 {
@@ -1012,4 +822,3 @@ html, body {
     font-size: 2.2rem;
   }
 }
-
